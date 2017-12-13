@@ -14,4 +14,16 @@ class BannerAdapter(val clickManager : BannerClickManager) : GroupAdapter(){
         }
     }
 
+    fun addChildBannerItems(categories: List<Category>){
+        for(category in categories){
+            add(ChildBannerItem(category, clickManager))
+        }
+    }
+
+    fun addSubBannerItems(categories: List<Category>) {
+        for(category in categories){
+            add(SubBannerItem(category,clickManager))
+        }
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.example.heady
 
 import com.example.heady.model.ApiResponse
+import com.example.heady.model.Category
 import com.example.heady.utils.BANNER_MAP
 import com.example.heady.utils.IMAGE_MAP
 import io.realm.Realm
@@ -19,6 +20,9 @@ class Repository @Inject constructor(val apiService: ApiService,val realmService
 
     fun fetchParentCategoriesFromDb() : Single<ApiResponse>
              = realmService.fetchParentCategories()
+
+    fun fetchChildCategories(parent_id : Int) : Single<List<Category>>
+            = realmService.fetchChildCategories(parent_id)
 
     fun saveDataInDb(apiResponse: ApiResponse){
         val realmDb = Realm.getDefaultInstance()

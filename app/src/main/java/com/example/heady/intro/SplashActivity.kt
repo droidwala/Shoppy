@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import com.example.heady.R
-import com.example.heady.categories.MainActivity
+import com.example.heady.categories.parentcategory.MainActivity
 import rx.Single
 import rx.Subscription
 import java.util.concurrent.TimeUnit

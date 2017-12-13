@@ -1,11 +1,13 @@
-package com.example.heady.categories
+package com.example.heady.categories.parentcategory
 
 import android.os.Bundle
 import android.view.View
 import com.example.heady.R
+import com.example.heady.categories.BannerAdapter
+import com.example.heady.categories.BannerClickManager
+import com.example.heady.categories.childcategory.childCategoryIntent
 import com.example.heady.model.Category
 import com.example.heady.utils.plusAssign
-import com.example.heady.utils.toast
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_with_title.*
@@ -18,7 +20,7 @@ import javax.inject.Inject
 /**
  * Created by punitdama on 12/12/17.
  */
-class MainActivity : DaggerAppCompatActivity(),BannerClickManager{
+class MainActivity : DaggerAppCompatActivity(), BannerClickManager {
     private val compositeSubscription by lazy(LazyThreadSafetyMode.NONE){
         CompositeSubscription()
     }
@@ -73,6 +75,6 @@ class MainActivity : DaggerAppCompatActivity(),BannerClickManager{
     }
 
     override fun openSubCategory(category: Category) {
-        toast("Open SubCategory!!")
+        startActivity(childCategoryIntent(category.id,category.name))
     }
 }

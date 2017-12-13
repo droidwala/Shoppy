@@ -1,4 +1,4 @@
-package com.example.heady.categories
+package com.example.heady.categories.parentcategory
 
 import com.example.heady.model.ApiResponse
 

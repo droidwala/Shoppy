@@ -23,7 +23,15 @@
         </activity>
 
         <activity
-            android:name=".categories.MainActivity"
+            android:name=".categories.parentcategory.MainActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".categories.childcategory.ChildCategoryActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".categories.subcategory.SubCategoryActivity"
             android:screenOrientation="portrait"/>
 
     </application>

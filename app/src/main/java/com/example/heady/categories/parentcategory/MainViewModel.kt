@@ -1,4 +1,4 @@
-package com.example.heady.categories
+package com.example.heady.categories.parentcategory
 
 import com.example.heady.Repository
 import com.example.heady.model.ApiResponse
@@ -49,19 +49,21 @@ class MainViewModel @Inject constructor(val repository: Repository){
     }
 
 
+    //ViewState mutation methods.
+    //We could use state reducer to replace this methods
     private fun loadingStarted(){
         Timber.d("loadingStarted called")
-        viewState.onNext(MainViewState(true,null,null))
+        viewState.onNext(MainViewState(true, null, null))
     }
 
     private fun loadingError(e: Throwable){
         Timber.d("loaingError called")
-        viewState.onNext(MainViewState(false,e.message,null))
+        viewState.onNext(MainViewState(false, e.message, null))
     }
 
     private fun loadingFinished(response : ApiResponse){
         Timber.d("loadingFinished called")
-        viewState.onNext(MainViewState(false,null,response))
+        viewState.onNext(MainViewState(false, null, response))
     }
 
 
