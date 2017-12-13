@@ -58,6 +58,8 @@ dependencies {
     provided 'org.glassfish:javax.annotation:10.0-b28'
 
     implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
+    debugImplementation   "com.readystatesoftware.chuck:library:$rootProject.chuckVersion"
+    releaseImplementation    "com.readystatesoftware.chuck:library-no-op:$rootProject.chuckVersion"
 
 
     testImplementation 'junit:junit:4.12'

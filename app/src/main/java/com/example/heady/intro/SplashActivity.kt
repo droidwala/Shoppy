@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import com.example.heady.R
-import com.example.heady.categories.ParentCategoryActivity
+import com.example.heady.categories.MainActivity
 import rx.Single
 import rx.Subscription
 import java.util.concurrent.TimeUnit
@@ -40,7 +40,7 @@ class SplashActivity : Activity(){
     }
 
     private fun takeUserInsideApp(){
-        startActivity(Intent(this,ParentCategoryActivity::class.java))
+        startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 }
