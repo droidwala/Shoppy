@@ -8,4 +8,5 @@
     <dimen name="text24sp">24sp</dimen>
     <dimen name="splash_logo">100dp</dimen>
     <dimen name="progress_bar_medium">36dp</dimen>
+    <dimen name="right_chevron">36dp</dimen>
 </resources>

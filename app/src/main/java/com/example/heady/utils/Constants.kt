@@ -3,6 +3,9 @@ package com.example.heady.utils
 /**
  * Created by punitdama on 12/12/17.
  */
+const val URL = "https://stark-spire-93433.herokuapp.com/json"
+
+
 const val MENS_WEAR_BANNER_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513061097/Mens_Wear.jpg"
 const val ELECTRONICS_BANNER_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513062647/Electronics.jpg"
 

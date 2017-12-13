@@ -3,6 +3,9 @@ package com.example.heady.categories
 import android.os.Bundle
 import android.view.View
 import com.example.heady.R
+import com.example.heady.model.Category
+import com.example.heady.utils.plusAssign
+import com.example.heady.utils.toast
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_with_title.*
@@ -15,10 +18,12 @@ import javax.inject.Inject
 /**
  * Created by punitdama on 12/12/17.
  */
-class MainActivity : DaggerAppCompatActivity(){
-
+class MainActivity : DaggerAppCompatActivity(),BannerClickManager{
     private val compositeSubscription by lazy(LazyThreadSafetyMode.NONE){
         CompositeSubscription()
+    }
+    private val adapter by lazy(LazyThreadSafetyMode.NONE) {
+        BannerAdapter(this)
     }
 
     @Inject lateinit var viewModel : MainViewModel
@@ -28,17 +33,18 @@ class MainActivity : DaggerAppCompatActivity(){
         setContentView(R.layout.activity_main)
 
         page_title.text = getString(R.string.app_name)
+        rv.adapter = adapter
 
-        compositeSubscription.add(viewModel.viewState()
+        compositeSubscription += viewModel.viewState()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::render,
-                        {error -> Timber.d("Error rendering view state" + error.localizedMessage)}));
+                        {error -> Timber.d("Error rendering view state" + error.localizedMessage)})
 
-        compositeSubscription.add(viewModel.fetchData()
+        compositeSubscription += viewModel.fetchData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ Timber.d("Response received")},
-                        {_ -> Timber.d("Error receiving response")}));
+                        {_ -> Timber.d("Error receiving response")})
 
     }
 
@@ -56,14 +62,17 @@ class MainActivity : DaggerAppCompatActivity(){
             api_error_text.visibility = View.GONE
         }
 
-        if(viewState.response !=null) {
-            Timber.d("Api Response fetched succesfully")
+        viewState.response?.categories?.let {
+            adapter.addItems(it)
         }
-
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        compositeSubscription.clear()
+        compositeSubscription.unsubscribe()
+    }
+
+    override fun openSubCategory(category: Category) {
+        toast("Open SubCategory!!")
     }
 }

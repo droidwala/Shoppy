@@ -2,6 +2,7 @@ package com.example.heady.categories
 
 import com.example.heady.Repository
 import com.example.heady.model.ApiResponse
+import com.example.heady.utils.URL
 import rx.Observable
 import rx.Single
 import rx.subjects.PublishSubject
@@ -11,7 +12,6 @@ import javax.inject.Inject
 /**
  * Created by punitdama on 12/12/17.
  */
-const val URL = "https://stark-spire-93433.herokuapp.com/json"
 class MainViewModel @Inject constructor(val repository: Repository){
 
     private val viewState : PublishSubject<MainViewState> = PublishSubject.create()

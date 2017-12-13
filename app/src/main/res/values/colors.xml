@@ -4,4 +4,13 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#D94359</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="shrug_black">#030303</color>
+    <color name="mountain_mist">#8F8E94</color>
+    <color name="shark">#2C3035</color>
+    <color name="abbey">#4E5257</color>
+    <color name="ocean_green">#28be87</color>
+    <color name="red_damask">#E26049</color>
+    <color name="desert_storm">#f0f0f0</color>
+    <color name="albaster">#FAFAFA</color>
+    <color name="oslo_gray">#969A9E</color>
 </resources>
