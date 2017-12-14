@@ -8,6 +8,8 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 /**
+ * Module class for telling Dagger which all subcomponents needs to be created for Activities
+ * By adding @ContributesAndroidInjector() dagger.android generates all subcomponents for us
  * Created by punitdama on 13/12/17.
  */
 @Module

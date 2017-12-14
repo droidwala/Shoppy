@@ -8,6 +8,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
+ * ApiService class written instead of using Retrofit library
+ * Since only 1 API call was involved it was better to just write simple helper using OkHTTP + RxJava to
+ * fetch and parse API response
  * Created by punitdama on 12/12/17.
  */
 @Singleton

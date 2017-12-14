@@ -4,6 +4,7 @@ import com.example.heady.model.Category
 import com.xwray.groupie.GroupAdapter
 
 /**
+ * Recylerview Adapter used to display Banner Images for various kind of Categories like Parent,Child,Sub,etc.
  * Created by punitdama on 13/12/17.
  */
 class BannerAdapter(val clickManager : BannerClickManager) : GroupAdapter(){

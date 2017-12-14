@@ -18,6 +18,8 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
+ * Shows Parent Categories like
+ * Mens Wear and Electronics
  * Created by punitdama on 12/12/17.
  */
 class MainActivity : DaggerAppCompatActivity(), BannerClickManager {
@@ -69,6 +71,7 @@ class MainActivity : DaggerAppCompatActivity(), BannerClickManager {
         compositeSubscription.unsubscribe()
     }
 
+    //Exit point
     override fun openSubCategory(category: Category) {
         startActivity(childCategoryIntent(category.id,category.name))
     }

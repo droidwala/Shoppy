@@ -5,9 +5,9 @@ import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
 /**
+ * Category RealmModel
  * Created by punitdama on 12/12/17.
  */
-
 open class Category(
         @PrimaryKey
         var id : Int = 0,

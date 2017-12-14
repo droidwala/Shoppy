@@ -12,6 +12,7 @@ import com.example.heady.model.Product
 import com.xwray.groupie.Item
 
 /**
+ * ViewHolder showing individual Product item
  * Created by punitdama on 14/12/17.
  */
 class ProductListItem(val product : Product) : Item<ItemListProductBinding>(){

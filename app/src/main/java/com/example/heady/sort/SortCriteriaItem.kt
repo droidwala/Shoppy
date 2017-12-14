@@ -5,6 +5,7 @@ import com.example.heady.databinding.ItemSortCriteriaBinding
 import com.xwray.groupie.Item
 
 /**
+ * ViewHolder showing individual Sort Criteria Item
  * Created by punitdama on 14/12/17.
  */
 class SortCriteriaItem(val sort_criteria : String, val is_checked : Boolean,val clickManager: SortCriteriaClickManager) : Item<ItemSortCriteriaBinding>(){

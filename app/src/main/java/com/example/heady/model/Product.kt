@@ -6,6 +6,7 @@ import io.realm.annotations.Ignore
 import io.realm.annotations.PrimaryKey
 
 /**
+ * Product RealmModel
  * Created by punitdama on 13/12/17.
  */
 open class Product(

@@ -4,6 +4,8 @@ import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
 /**
+ * Variant RealmModel.
+ * Defines variant of product.
  * Created by punitdama on 13/12/17.
  */
 

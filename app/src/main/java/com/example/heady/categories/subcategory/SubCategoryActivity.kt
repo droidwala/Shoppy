@@ -24,11 +24,13 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
+ * Shows SubCategories of Child Categories like Formal Shoes and Casual shoes under Foot Wear
  * Created by punitdama on 14/12/17.
  */
 const val CATEGORY_ID = "id"
 const val CATEGORY_NAME = "name"
 
+//Entry point
 fun Context.subCategoryIntent(category_id : Int, category_name : String) : Intent {
     return Intent(this, SubCategoryActivity::class.java).apply {
         putExtra(CATEGORY_ID,category_id)
@@ -104,6 +106,7 @@ class SubCategoryActivity() : DaggerAppCompatActivity(),BannerClickManager{
         compositeSubscription.unsubscribe()
     }
 
+    //Exit point
     override fun openSubCategory(category: Category) {
         startActivity(productsListIntent(category.id,category.name))
     }

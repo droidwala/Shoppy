@@ -10,6 +10,8 @@ import rx.Subscription
 import java.util.concurrent.TimeUnit
 
 /**
+ * Launcher Activity. Nothing great.
+ * Just showing logo and then opening MainScreen after 1-sec delay
  * Created by punitdama on 12/12/17.
  */
 class SplashActivity : Activity(){

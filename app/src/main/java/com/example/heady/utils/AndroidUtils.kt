@@ -8,6 +8,9 @@ import rx.Subscription
 import rx.subscriptions.CompositeSubscription
 
 /**
+ * Android related extension functions
+ * Not much here.
+ * But lot more could be added
  * Created by punitdama on 12/12/17.
  */
 

@@ -7,6 +7,7 @@ import com.example.heady.model.Category
 import com.xwray.groupie.Item
 
 /**
+ * ViewHolder used to Banner Items for Child Categories
  * Created by punitdama on 14/12/17.
  */
 

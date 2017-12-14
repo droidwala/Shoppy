@@ -8,6 +8,10 @@ import io.realm.RealmConfiguration
 import timber.log.Timber
 
 /**
+ * Base Application
+ * Screens order:
+ * SplashActivity -> ParentCategoryActivity -> ChildCategoryActivity -> SubCategoryActivity ->
+ * ProductsActivity -> ProductDetailActivity(left to be implemented)
  * Created by punitdama on 12/12/17.
  */
 

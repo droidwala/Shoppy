@@ -8,6 +8,7 @@ import com.example.heady.model.Category
 import com.xwray.groupie.Item
 
 /**
+ * ViewHolder used to display items for sub-categories under child categories
  * Created by punitdama on 14/12/17.
  */
 class SubBannerItem(val category : Category, val clickManager : BannerClickManager) : Item<ItemSubBannerBinding>(){

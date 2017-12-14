@@ -6,6 +6,7 @@ import com.example.heady.utils.MOST_VIEWED_PRODUCTS
 import com.xwray.groupie.GroupAdapter
 
 /**
+ * Recyclerview Adapter used to show list of Sort Criteria≈
  * Created by punitdama on 14/12/17.
  */
 class SortCriteriaAdapter(val selected_criteria : String?,val clickManager: SortCriteriaClickManager) : GroupAdapter(){

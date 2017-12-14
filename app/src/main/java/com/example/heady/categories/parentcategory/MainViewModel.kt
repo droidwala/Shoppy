@@ -10,6 +10,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
+ * ViewModel associated with MainActivity
  * Created by punitdama on 12/12/17.
  */
 class MainViewModel @Inject constructor(val repository: Repository){

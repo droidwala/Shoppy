@@ -11,6 +11,10 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
+ * Intermediary between viewModel and external API service/Db
+ * Implemented so that viewModel is unaware of the source of Data
+ * It is responsibility of Repository to decide where to fetch data for current screen
+ * Single Repository was used since there was just single source of data
  * Created by punitdama on 12/12/17.
  */
 

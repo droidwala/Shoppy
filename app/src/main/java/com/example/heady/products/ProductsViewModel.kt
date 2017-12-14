@@ -12,6 +12,7 @@ import rx.subjects.PublishSubject
 import javax.inject.Inject
 
 /**
+ * ViewModel associated with ProductsActivity
  * Created by punitdama on 14/12/17.
  */
 class ProductsViewModel @Inject constructor(val repository: Repository){

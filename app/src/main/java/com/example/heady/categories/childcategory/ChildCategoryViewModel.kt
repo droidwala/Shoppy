@@ -9,6 +9,7 @@ import rx.subjects.PublishSubject
 import javax.inject.Inject
 
 /**
+ * ViewModel associated with ChildCategoriesActivity
  * Created by punitdama on 13/12/17.
  */
 class ChildCategoryViewModel @Inject constructor(val repository: Repository){

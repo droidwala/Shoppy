@@ -4,6 +4,7 @@ import com.example.heady.model.Product
 import com.xwray.groupie.GroupAdapter
 
 /**
+ * RecyclerView Adapter attached to Recyclerview showing List of Products
  * Created by punitdama on 14/12/17.
  */
 class ProductsAdapter(val isGridLayout : Boolean = true) : GroupAdapter(){

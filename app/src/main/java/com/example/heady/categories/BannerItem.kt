@@ -7,6 +7,7 @@ import com.example.heady.model.Category
 import com.xwray.groupie.Item
 
 /**
+ * ViewHolder used to display banner item for Parent Categories
  * Created by punitdama on 13/12/17.
  */
 class BannerItem(val category : Category,val clickManager : BannerClickManager) : Item<ItemBannerBinding>(){

@@ -10,6 +10,7 @@ import com.example.heady.R
 
 
 /**
+ * Used to create Divider Item decoration where dividers are drawn both in vertical and horizontal direction
  * Created by punitdama on 14/12/17.
  */
 

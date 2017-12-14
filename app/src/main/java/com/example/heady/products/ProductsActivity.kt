@@ -24,12 +24,16 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
+ * Shows List of Products under particular categories like
+ *  Casual Shoes
+ * |-> Sneakers,Loafers,etc.
  * Created by punitdama on 14/12/17.
  */
 const val CATEGORY_ID = "id"
 const val CATEGORY_NAME = "name"
 
 //Entry point
+//Extension function written to open screen
 fun Context.productsListIntent(category_id : Int, category_name : String) : Intent {
     return Intent(this, ProductsActivity::class.java).apply {
         putExtra(CATEGORY_ID,category_id)
@@ -49,7 +53,7 @@ class ProductsActivity() : DaggerAppCompatActivity(){
 
     private var category_id : Int = 0
     private lateinit var sortCriteriaDialogFragment : SortCriteriaDialogFragment
-    private var selected_criteria : String? = null
+    private var selected_sort_criteria: String? = null //Defines current selected sort_criteria
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,20 +82,23 @@ class ProductsActivity() : DaggerAppCompatActivity(){
 
     }
 
+    //Triggered when user selects particular Sort criteria
     fun sortData(query : String){
-        selected_criteria = query
+        selected_sort_criteria = query
         compositeSubscription += viewModel.sortData(category_id,query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({Timber.d("Sorted by " + query)},
                         {error -> Timber.d("Error sorting by " + query + " " + error.localizedMessage)})
-        if(selected_criteria == CLEAR_SORT_FLAGS){
-            selected_criteria = null
+        if(selected_sort_criteria == CLEAR_SORT_FLAGS){
+            selected_sort_criteria = null
         }
 
     }
 
-    //Could have better managed using sealed classes
+    // Single Render method through which all UI changes are done
+    // No multiple entry points where UI is changed causing state issues
+    // Could have better managed using sealed classes
     private fun render(viewState: ProductsViewState){
         when(viewState.isLoading){
             true -> loader.visibility = View.VISIBLE
@@ -151,7 +158,7 @@ class ProductsActivity() : DaggerAppCompatActivity(){
         }
 
         sort_container.addClickListener(View.OnClickListener {
-            sortCriteriaDialogFragment = SortCriteriaDialogFragment.newInstance(selected_criteria)
+            sortCriteriaDialogFragment = SortCriteriaDialogFragment.newInstance(selected_sort_criteria)
             sortCriteriaDialogFragment.show(supportFragmentManager,"Sort")
         })
 

@@ -20,11 +20,14 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
+ * Display list of Child Categories like
+ * Top Wear,Bottom Wear,Foot Wear,etc.
  * Created by punitdama on 13/12/17.
  */
 const val CATEGORY_ID = "id"
 const val CATEGORY_NAME = "name"
 
+//Entry point
 fun Context.childCategoryIntent(category_id : Int, category_name : String) : Intent{
     return Intent(this,ChildCategoryActivity::class.java).apply {
         putExtra(CATEGORY_ID,category_id)
@@ -101,6 +104,7 @@ class ChildCategoryActivity : DaggerAppCompatActivity(),BannerClickManager{
         compositeSubscription.unsubscribe()
     }
 
+    //Exit point
     override fun openSubCategory(category: Category) {
         startActivity(subCategoryIntent(category.id,category.name))
     }

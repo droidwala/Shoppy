@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 /**
+ * Module providing all Repository dependencies in form of Singleton
  * Created by punitdama on 13/12/17.
  */
 @Module

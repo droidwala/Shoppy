@@ -10,6 +10,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
+ * Deals with fetching data from RealmDb
+ * Data is once fetched initially from API and saved in DB.
+ * Rest all screens simply fetch data from DB
  * Created by punitdama on 13/12/17.
  */
 @Singleton

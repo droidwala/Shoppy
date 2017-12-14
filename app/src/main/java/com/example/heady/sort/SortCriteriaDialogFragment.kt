@@ -11,6 +11,7 @@ import com.example.heady.products.ProductsActivity
 import com.example.heady.utils.CLEAR_SORT_FLAGS
 
 /**
+ * Sort Dialog shown as BottomSheetDialogFragment
  * Created by punitdama on 14/12/17.
  */
 const val SELECTED_CRITERIA = "selected_criteria"
