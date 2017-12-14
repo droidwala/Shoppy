@@ -1,6 +1,8 @@
 package com.example.heady.utils
 
 import android.content.Context
+import android.support.constraint.Group
+import android.view.View
 import android.widget.Toast
 import rx.Subscription
 import rx.subscriptions.CompositeSubscription
@@ -17,3 +19,8 @@ operator fun CompositeSubscription.plusAssign(subscription: Subscription){
     add(subscription)
 }
 
+fun Group.addClickListener(clickListener : View.OnClickListener){
+    for(id in referencedIds){
+        rootView.findViewById<View>(id).setOnClickListener(clickListener)
+    }
+}

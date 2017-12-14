@@ -28,6 +28,17 @@ class Repository @Inject constructor(val apiService: ApiService,val realmService
     fun fetchProducts(parent_id: Int) : Single<List<Product>>
             = realmService.fetchProducts(parent_id)
 
+    fun sortByMostViewedProducts(parent_id: Int, query : String)
+            = realmService.sortProductsByViewCount(parent_id,query)
+
+    fun sortByMostOrderedProducts(parent_id: Int, query: String)
+            = realmService.sortProductsByOrderCount(parent_id,query)
+
+    fun sortByMostSharedProducts(parent_id: Int,query: String)
+            = realmService.sortProductsByShareCount(parent_id,query)
+
+
+
     fun saveDataInDb(apiResponse: ApiResponse){
         val realmDb = Realm.getDefaultInstance()
         Timber.d("Saving Data in Db")

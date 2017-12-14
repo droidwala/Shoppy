@@ -37,7 +37,7 @@ ext {
 
     //UI
     supportLibraryVersion = "27.0.2"
-    constraintLayoutVersion = "1.0.2"
+    constraintLayoutVersion = "1.1.0-beta3"
     groupieVersion = "1.1.1"
     glideVersion = "3.7.0"
 

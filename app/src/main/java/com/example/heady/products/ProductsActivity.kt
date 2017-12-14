@@ -8,6 +8,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.example.heady.R
+import com.example.heady.sort.SortCriteriaDialogFragment
+import com.example.heady.utils.CLEAR_SORT_FLAGS
+import com.example.heady.utils.addClickListener
 import com.example.heady.utils.plusAssign
 import com.example.heady.viewutils.GridDividerDecoration
 import dagger.android.support.DaggerAppCompatActivity
@@ -26,6 +29,7 @@ import javax.inject.Inject
 const val CATEGORY_ID = "id"
 const val CATEGORY_NAME = "name"
 
+//Entry point
 fun Context.productsListIntent(category_id : Int, category_name : String) : Intent {
     return Intent(this, ProductsActivity::class.java).apply {
         putExtra(CATEGORY_ID,category_id)
@@ -33,16 +37,19 @@ fun Context.productsListIntent(category_id : Int, category_name : String) : Inte
     }
 }
 
-
 class ProductsActivity() : DaggerAppCompatActivity(){
 
     @Inject lateinit var viewModel : ProductsViewModel
     private val compositeSubscription by lazy(LazyThreadSafetyMode.NONE) { CompositeSubscription() }
+
+    //Using 2 adapters so that we can easily swap between two adapters when changing layoutManagers
+    //from GridLayoutManager <-> LinearLayoutManager
     private val gridAdapter by lazy(LazyThreadSafetyMode.NONE) { ProductsAdapter(true) }
     private val listAdapter by lazy(LazyThreadSafetyMode.NONE) { ProductsAdapter(false) }
 
-    private lateinit var currentLayoutManager : RecyclerView.LayoutManager
     private var category_id : Int = 0
+    private lateinit var sortCriteriaDialogFragment : SortCriteriaDialogFragment
+    private var selected_criteria : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +59,7 @@ class ProductsActivity() : DaggerAppCompatActivity(){
         if(category_id == 0){
             finish()
         }
+
 
         toolbarSetUp()
         rv.recyclerViewSetup()
@@ -70,6 +78,20 @@ class ProductsActivity() : DaggerAppCompatActivity(){
 
     }
 
+    fun sortData(query : String){
+        selected_criteria = query
+        compositeSubscription += viewModel.sortData(category_id,query)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe ({Timber.d("Sorted by " + query)},
+                        {error -> Timber.d("Error sorting by " + query + " " + error.localizedMessage)})
+        if(selected_criteria == CLEAR_SORT_FLAGS){
+            selected_criteria = null
+        }
+
+    }
+
+    //Could have better managed using sealed classes
     private fun render(viewState: ProductsViewState){
         when(viewState.isLoading){
             true -> loader.visibility = View.VISIBLE
@@ -127,8 +149,15 @@ class ProductsActivity() : DaggerAppCompatActivity(){
 
             }
         }
+
+        sort_container.addClickListener(View.OnClickListener {
+            sortCriteriaDialogFragment = SortCriteriaDialogFragment.newInstance(selected_criteria)
+            sortCriteriaDialogFragment.show(supportFragmentManager,"Sort")
+        })
+
     }
 
+    //Changing LayoutManager and swapping Adapters for different item layouts in Grid/Linear layouts
     private fun setLayoutManager(layoutManager: RecyclerView.LayoutManager, adapter: ProductsAdapter){
         rv.layoutManager = layoutManager
         rv.swapAdapter(adapter,false)

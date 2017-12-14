@@ -58,8 +58,10 @@
         app:layout_constraintHorizontal_bias="0.3"/>
 
     <TextView
+        android:id="@+id/sort_text"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center_vertical"
         android:text="@string/sort_by"
         app:layout_constraintLeft_toRightOf="@+id/sort_icon"
         app:layout_constraintRight_toRightOf="parent"
@@ -69,5 +71,12 @@
         android:layout_marginLeft="8dp"
         android:textColor="@color/colorWhite"
         android:fontFamily="@string/font_family_medium"
+        />
+
+    <android.support.constraint.Group
+        android:id="@+id/sort_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="sort_icon,sort_text,dummy_view"
         />
 </android.support.constraint.ConstraintLayout>

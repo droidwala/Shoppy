@@ -9,6 +9,7 @@ import com.xwray.groupie.GroupAdapter
 class ProductsAdapter(val isGridLayout : Boolean = true) : GroupAdapter(){
 
     fun addProducts(products : List<Product>){
+        clear()
         if(isGridLayout) {
             for (product in products) {
                 add(ProductGridItem(product))

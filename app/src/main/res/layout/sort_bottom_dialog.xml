@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
+
+        <TextView
+            android:id="@+id/screen_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/left_guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="@id/right_guideline"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/sort_by"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/text18sp"
+            android:fontFamily="@string/font_family_medium"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/screen_title"
+            app:layout_constraintLeft_toLeftOf="@id/left_guideline"
+            app:layout_constraintRight_toRightOf="@id/right_guideline"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/left_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp"
+            />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/right_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp"
+            />
+
+        <TextView
+            android:id="@+id/clear_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_all"
+            app:layout_constraintRight_toRightOf="@id/right_guideline"
+            app:layout_constraintTop_toTopOf="@+id/screen_title"
+            app:layout_constraintBaseline_toBaselineOf="@+id/screen_title"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

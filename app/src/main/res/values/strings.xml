@@ -3,4 +3,5 @@
     <string name="sort_by">Sort</string>
     <string name="product_price">\u20B9%s</string>
     <string name="product_size">Size: %s</string>
+    <string name="clear_all">Clear All</string>
 </resources>

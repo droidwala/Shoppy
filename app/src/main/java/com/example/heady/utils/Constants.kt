@@ -36,6 +36,11 @@ const val TROUSER_IMAGE_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/
 const val CASUAL_FOOTWEAR_IMAGE_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513067335/Casual_Shoe.jpg"
 const val FORMAL_FOOTWEAR_IMAGE_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513067381/Formal_Shoe.jpg"
 
+const val TOSHIBHA_IMAGE_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513274939/Toshibha_Laptop_Image.jpg"
+const val DELL_IMAGE_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513274939/Dell_Laptop_Image.jpg"
+
+const val IPHONE_X_IMAGE_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513274939/IPhone_X_Image.jpg"
+const val SAMSUNG_IMAGE_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513274939/Samsung_Image.jpg"
 
 const val MOBILE_IMAGE_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513073345/Mobile_Image.jpg"
 const val LAPTOP_IMAGE_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513073392/Laptop_Image.jpg"
@@ -54,10 +59,10 @@ val BANNER_MAP = mapOf(
         "Tracks & Trousers" to TROUSERS_BANNER_URL,
         " Casuals" to CASUAL_FOOTWEAR_BANNER_URL,
         "Formals" to FORMAL_FOOTWEAR_BANNER_URL,
-        "Apple" to MOBILE_PHONES_BANNER_URL,
-        "Samsung" to MOBILE_PHONES_BANNER_URL,
-        "Dell" to LAPTOPS_BANNER_URL,
-        "Toshiba" to LAPTOPS_BANNER_URL
+        "Apple" to IPHONE_X_IMAGE_URL,
+        "Samsung" to SAMSUNG_IMAGE_URL,
+        "Dell" to DELL_IMAGE_URL,
+        "Toshiba" to TOSHIBHA_IMAGE_URL
         )
 
 val IMAGE_MAP = mapOf(
@@ -67,8 +72,13 @@ val IMAGE_MAP = mapOf(
         "Tracks & Trousers" to TROUSER_IMAGE_URL,
         " Casuals" to CASUAL_FOOTWEAR_IMAGE_URL,
         "Formals" to FORMAL_FOOTWEAR_IMAGE_URL,
-        "Apple" to MOBILE_IMAGE_URL,
-        "Samsung" to MOBILE_IMAGE_URL,
-        "Dell" to LAPTOP_IMAGE_URL,
-        "Toshiba" to LAPTOP_IMAGE_URL
+        "Apple" to IPHONE_X_IMAGE_URL,
+        "Samsung" to SAMSUNG_IMAGE_URL,
+        "Dell" to DELL_IMAGE_URL,
+        "Toshiba" to TOSHIBHA_IMAGE_URL
 )
+
+const val MOST_VIEWED_PRODUCTS = "Most Viewed Products"
+const val MOST_ORDERED_PRODUCTS = "Most OrdeRed Products"
+const val MOST_SHARED_PRODUCTS = "Most ShaRed Products"
+const val CLEAR_SORT_FLAGS = "Clear All"

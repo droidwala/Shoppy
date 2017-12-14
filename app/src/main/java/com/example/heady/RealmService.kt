@@ -1,9 +1,11 @@
 package com.example.heady
 
+import android.support.v4.util.Pair
 import com.example.heady.model.*
 import io.realm.Realm
 import io.realm.kotlin.where
 import rx.Single
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -68,5 +70,97 @@ class RealmService @Inject constructor(){
             return@fromCallable result?.products
         }
     }
+
+    fun sortProductsByViewCount(parent_id: Int, query : String) : Single<List<Product>>{
+       return Single.zip(fetchProductRankings(query),
+                fetchProducts(parent_id),
+                this::generatePair)
+                .flatMap(this::sortByViewCount)
+    }
+
+    fun sortProductsByOrderCount(parent_id: Int, query: String) : Single<List<Product>>{
+        return Single.zip(
+                fetchProductRankings(query),
+                fetchProducts(parent_id),
+                this::generatePair)
+                .flatMap(this::sortByOrderCount)
+    }
+
+    fun sortProductsByShareCount(parent_id: Int, query: String) : Single<List<Product>>{
+        return Single.zip(
+                fetchProductRankings(query),
+                fetchProducts(parent_id),
+                this::generatePair)
+                .flatMap(this::sortBySharesCount)
+    }
+
+    private fun fetchProductRankings(query : String) : Single<MutableMap<Int,ProductRanking>>{
+        return Single.fromCallable {
+            val realmDb = Realm.getDefaultInstance()
+            val ranking_realm = realmDb.where<Ranking>()
+                    .equalTo("ranking",query)
+                    .findFirst()
+
+            val result = realmDb.copyFromRealm(ranking_realm)
+
+            val product_rankings = mutableMapOf<Int,ProductRanking>()
+            for(product in result!!.products){
+                product_rankings[product.id] = product
+            }
+
+            realmDb.close()
+            return@fromCallable product_rankings
+        }
+    }
+
+    private fun generatePair(product_rankings : MutableMap<Int,ProductRanking>, products : List<Product>)
+            = Pair.create(product_rankings,products)
+
+    private fun sortByViewCount(pair : Pair<MutableMap<Int,ProductRanking>,List<Product>>) : Single<List<Product>>{
+        val product_rankings = pair.first!!
+        val products = pair.second!!
+
+        for(index in products.indices){
+            product_rankings[products[index].id]?.let {
+                products[index].view_count = it.view_count
+            }
+        }
+
+        return Single.just(products.sortedByDescending {
+            it.view_count
+        })
+    }
+
+    private fun sortByOrderCount(pair : Pair<MutableMap<Int,ProductRanking>,List<Product>>) : Single<List<Product>>{
+        val product_rankings = pair.first!!
+        val products = pair.second!!
+
+        for(index in products.indices){
+            product_rankings[products[index].id]?.let {
+                products[index].order_count = it.order_count
+            }
+        }
+
+        return Single.just(products.sortedByDescending {
+            it.order_count
+        })
+    }
+
+    private fun sortBySharesCount(pair : Pair<MutableMap<Int,ProductRanking>,List<Product>>) : Single<List<Product>>{
+        val product_rankings = pair.first!!
+        val products = pair.second!!
+
+        for(index in products.indices){
+            product_rankings[products[index].id]?.let {
+                products[index].shares = it.shares
+            }
+        }
+
+        return Single.just(products.sortedByDescending {
+            it.shares
+        })
+    }
+
+
 
 }
