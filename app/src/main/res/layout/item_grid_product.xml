@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/parent">
+        <ImageView
+            android:id="@+id/product_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="w,1:1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="8dp"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/product_image"
+            app:layout_constraintLeft_toLeftOf="@+id/product_image"
+            android:layout_marginTop="8dp"
+            tools:text="Nike Sneaker"
+            android:textSize="@dimen/text14sp"
+            android:textColor="@color/shrug_black"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+
+        <TextView
+            android:id="@+id/product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/product_name"
+            app:layout_constraintLeft_toLeftOf="@id/product_name"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/shrug_black"
+            android:textSize="@dimen/text18sp"
+            tools:text="\u20B928000"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

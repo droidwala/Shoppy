@@ -34,6 +34,10 @@
             android:name=".categories.subcategory.SubCategoryActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".products.ProductsActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

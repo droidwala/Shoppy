@@ -1,9 +1,6 @@
 package com.example.heady
 
-import com.example.heady.model.ApiResponse
-import com.example.heady.model.CATEGORY_ID
-import com.example.heady.model.CATEGORY_NAME
-import com.example.heady.model.Category
+import com.example.heady.model.*
 import io.realm.Realm
 import io.realm.kotlin.where
 import rx.Single
@@ -56,6 +53,19 @@ class RealmService @Inject constructor(){
 
             realmDb.close()
             return@flatMap Single.just(result)
+        }
+    }
+
+    fun fetchProducts(parent_id: Int) : Single<List<Product>>{
+        return Single.fromCallable {
+            val realmDb = Realm.getDefaultInstance()
+            val category = realmDb.where<Category>()
+                    .equalTo(CATEGORY_ID,parent_id)
+                    .findFirst()
+
+            val result = realmDb.copyFromRealm(category);
+            realmDb.close()
+            return@fromCallable result?.products
         }
     }
 

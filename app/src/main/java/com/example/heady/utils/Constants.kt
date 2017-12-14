@@ -67,8 +67,8 @@ val IMAGE_MAP = mapOf(
         "Tracks & Trousers" to TROUSER_IMAGE_URL,
         " Casuals" to CASUAL_FOOTWEAR_IMAGE_URL,
         "Formals" to FORMAL_FOOTWEAR_IMAGE_URL,
-        "Apple" to MOBILE_PHONES_BANNER_URL,
-        "Samsung" to MOBILE_PHONES_BANNER_URL,
-        "Dell" to LAPTOPS_BANNER_URL,
-        "Toshiba" to LAPTOPS_BANNER_URL
+        "Apple" to MOBILE_IMAGE_URL,
+        "Samsung" to MOBILE_IMAGE_URL,
+        "Dell" to LAPTOP_IMAGE_URL,
+        "Toshiba" to LAPTOP_IMAGE_URL
 )

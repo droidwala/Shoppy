@@ -11,6 +11,7 @@ import com.example.heady.categories.BannerClickManager
 import com.example.heady.categories.childcategory.ChildCategoryViewModel
 import com.example.heady.categories.childcategory.ChildCategoryViewState
 import com.example.heady.model.Category
+import com.example.heady.products.productsListIntent
 import com.example.heady.utils.plusAssign
 import com.example.heady.utils.toast
 import dagger.android.support.DaggerAppCompatActivity
@@ -38,12 +39,8 @@ fun Context.subCategoryIntent(category_id : Int, category_name : String) : Inten
 class SubCategoryActivity() : DaggerAppCompatActivity(),BannerClickManager{
     @Inject lateinit var viewModel : ChildCategoryViewModel
 
-    private val compositeSubscription by lazy(LazyThreadSafetyMode.NONE) {
-        CompositeSubscription()
-    }
-    private val adapter by lazy(LazyThreadSafetyMode.NONE) {
-        BannerAdapter(this)
-    }
+    private val compositeSubscription by lazy(LazyThreadSafetyMode.NONE) { CompositeSubscription() }
+    private val adapter by lazy(LazyThreadSafetyMode.NONE) { BannerAdapter(this) }
 
     private var category_id : Int = 0
 
@@ -99,7 +96,7 @@ class SubCategoryActivity() : DaggerAppCompatActivity(),BannerClickManager{
             it.setDisplayShowTitleEnabled(false)
         }
         toolbar.setNavigationOnClickListener{finish()}
-        page_title.text = intent.getStringExtra(com.example.heady.categories.childcategory.CATEGORY_NAME)
+        page_title.text = intent.getStringExtra(CATEGORY_NAME)
     }
 
     override fun onDestroy() {
@@ -108,6 +105,6 @@ class SubCategoryActivity() : DaggerAppCompatActivity(),BannerClickManager{
     }
 
     override fun openSubCategory(category: Category) {
-        toast("Open Products screen")
+        startActivity(productsListIntent(category.id,category.name))
     }
 }

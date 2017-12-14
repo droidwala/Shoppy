@@ -11,4 +11,5 @@
     <dimen name="right_chevron">36dp</dimen>
     <dimen name="right_chevron_24dp">24dp</dimen>
     <dimen name="right_chevron_30dp">30dp</dimen>
+    <dimen name="insets">8dp</dimen>
 </resources>

@@ -35,12 +35,8 @@ fun Context.childCategoryIntent(category_id : Int, category_name : String) : Int
 class ChildCategoryActivity : DaggerAppCompatActivity(),BannerClickManager{
 
     @Inject lateinit var viewModel : ChildCategoryViewModel
-    private val compositeSubscription by lazy(LazyThreadSafetyMode.NONE) {
-        CompositeSubscription()
-    }
-    private val adapter by lazy(LazyThreadSafetyMode.NONE) {
-        BannerAdapter(this)
-    }
+    private val compositeSubscription by lazy(LazyThreadSafetyMode.NONE) { CompositeSubscription() }
+    private val adapter by lazy(LazyThreadSafetyMode.NONE) { BannerAdapter(this) }
 
     private var category_id : Int = 0
 

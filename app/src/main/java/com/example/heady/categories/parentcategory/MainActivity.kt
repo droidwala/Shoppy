@@ -21,13 +21,8 @@ import javax.inject.Inject
  * Created by punitdama on 12/12/17.
  */
 class MainActivity : DaggerAppCompatActivity(), BannerClickManager {
-    private val compositeSubscription by lazy(LazyThreadSafetyMode.NONE){
-        CompositeSubscription()
-    }
-    private val adapter by lazy(LazyThreadSafetyMode.NONE) {
-        BannerAdapter(this)
-    }
-
+    private val compositeSubscription by lazy(LazyThreadSafetyMode.NONE){ CompositeSubscription() }
+    private val adapter by lazy(LazyThreadSafetyMode.NONE) { BannerAdapter(this) }
     @Inject lateinit var viewModel : MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
