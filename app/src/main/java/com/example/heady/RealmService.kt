@@ -5,7 +5,6 @@ import com.example.heady.model.*
 import io.realm.Realm
 import io.realm.kotlin.where
 import rx.Single
-import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 

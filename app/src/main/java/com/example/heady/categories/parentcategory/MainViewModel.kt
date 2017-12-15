@@ -17,12 +17,9 @@ class MainViewModel @Inject constructor(val repository: Repository){
 
     private val viewState : PublishSubject<MainViewState> = PublishSubject.create()
 
+    //Calls
     fun fetchData() : Single<ApiResponse>{
-        return Single.concat(
-                fetchDataFromDb().onErrorResumeNext(fetchDataFromNetwork(URL)),
-                fetchDataFromNetwork(URL))
-                .takeFirst{response -> response !=null && response.categories.isNotEmpty()}
-                .toSingle()
+        return repository.fetchParentCategories(URL)
                 .doOnSubscribe { loadingStarted()}
                 .doOnError{error -> loadingError(error)}
                 .doOnSuccess(this::loadingFinished)
@@ -31,24 +28,6 @@ class MainViewModel @Inject constructor(val repository: Repository){
     fun viewState() : Observable<MainViewState>{
         return viewState
     }
-
-
-    private fun fetchDataFromNetwork(url : String) : Single<ApiResponse>{
-        return repository.fetchParentCategoriesFromNetwork(url)
-                .doOnSuccess(this::saveDataInDb)
-                .flatMap { fetchDataFromDb() }
-
-    }
-
-    private fun fetchDataFromDb() : Single<ApiResponse>{
-        return repository.fetchParentCategoriesFromDb()
-    }
-
-    private fun saveDataInDb(apiResponse: ApiResponse){
-        Timber.d("saveDataInDb called")
-        repository.saveDataInDb(apiResponse)
-    }
-
 
     //ViewState mutation methods.
     //We could use state reducer to replace this methods
