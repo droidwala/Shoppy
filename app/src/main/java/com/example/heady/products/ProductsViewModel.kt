@@ -21,18 +21,14 @@ class ProductsViewModel @Inject constructor(val repository: Repository){
 
 
     fun fetchData(parent_id : Int) : Single<List<Product>>{
-        return fetchProducts(parent_id)
-                .doOnSubscribe { loadingStarted() }
-                .doOnError { error -> loadingError(error) }
-                .doOnSuccess(this::loadingFinished)
+        return fetchProducts(parent_id).compose(sideEffect())
     }
-
 
     fun sortData(parent_id: Int, query : String) : Single<List<Product>> {
         return when(query){
-            MOST_VIEWED_PRODUCTS -> sortByMostViewedProducts(parent_id,query)
-            MOST_ORDERED_PRODUCTS -> sortByMostOrderedProducts(parent_id,query)
-            MOST_SHARED_PRODUCTS -> sortByMostSharedProducts(parent_id,query)
+            MOST_VIEWED_PRODUCTS -> sortByMostViewedProducts(parent_id,query).compose(sideEffect())
+            MOST_ORDERED_PRODUCTS -> sortByMostOrderedProducts(parent_id,query).compose(sideEffect())
+            MOST_SHARED_PRODUCTS -> sortByMostSharedProducts(parent_id,query).compose(sideEffect())
             CLEAR_SORT_FLAGS -> fetchData(parent_id)
             else -> throw IllegalArgumentException("Invalid sort criteria selected")
         }
@@ -48,23 +44,14 @@ class ProductsViewModel @Inject constructor(val repository: Repository){
 
     private fun sortByMostViewedProducts(parent_id: Int,query : String) : Single<List<Product>>{
         return repository.sortByMostViewedProducts(parent_id,query)
-                .doOnSubscribe { loadingStarted() }
-                .doOnError { error -> loadingError(error) }
-                .doOnSuccess(this::loadingFinished)
     }
 
     private fun sortByMostOrderedProducts(parent_id: Int,query: String) : Single<List<Product>>{
         return repository.sortByMostOrderedProducts(parent_id,query)
-                .doOnSubscribe { loadingStarted() }
-                .doOnError { error -> loadingError(error) }
-                .doOnSuccess(this::loadingFinished)
     }
 
     private fun sortByMostSharedProducts(parent_id: Int,query: String) : Single<List<Product>>{
         return repository.sortByMostSharedProducts(parent_id,query)
-                .doOnSubscribe { loadingStarted() }
-                .doOnError { error -> loadingError(error) }
-                .doOnSuccess(this::loadingFinished)
     }
 
     private fun loadingStarted(){
@@ -77,6 +64,15 @@ class ProductsViewModel @Inject constructor(val repository: Repository){
 
     private fun loadingFinished(products : List<Product>){
         viewState.onNext(ProductsViewState(false,null,products))
+    }
+
+    private fun sideEffect() : (Single<List<Product>>) -> Single<List<Product>>{
+        return {
+            single ->
+            single.doOnSubscribe { loadingStarted() }
+                    .doOnError { error -> loadingError(error) }
+                    .doOnSuccess(this::loadingFinished)
+        }
     }
 
 }
