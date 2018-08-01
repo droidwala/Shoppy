@@ -6,7 +6,6 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "com.example.heady"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -74,6 +73,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    kapt 'com.android.databinding:compiler:3.0.0'
+    kapt 'com.android.databinding:compiler:3.1.0'
 }
 
