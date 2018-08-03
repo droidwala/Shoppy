@@ -2,6 +2,8 @@ package com.example.heady.di
 
 import android.app.Application
 import com.example.heady.ShoppyApplication
+import com.example.heady.categories.childcategory.ChildCategoryViewModel
+import com.example.heady.categories.parentcategory.MainViewModel
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -17,6 +19,9 @@ import javax.inject.Singleton
         ActivityBindingModule::class,
         AndroidSupportInjectionModule::class))
 interface AppComponent : AndroidInjector<ShoppyApplication> {
+
+    fun mainViewModel() : MainViewModel
+    fun childCategoryViewModel() : ChildCategoryViewModel
 
     @Component.Builder
     interface Builder{

@@ -1,5 +1,6 @@
 package com.example.heady
 
+import com.example.heady.di.AppComponent
 import com.example.heady.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
@@ -17,6 +18,7 @@ import timber.log.Timber
 
 class ShoppyApplication : DaggerApplication(){
 
+    lateinit var component : AppComponent
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
@@ -31,7 +33,8 @@ class ShoppyApplication : DaggerApplication(){
 
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerAppComponent.builder().application(this).build()
+        component = DaggerAppComponent.builder().application(this).build()
+        return component
     }
 
 }
