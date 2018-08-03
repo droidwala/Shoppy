@@ -9,15 +9,18 @@ import com.example.heady.categories.BannerAdapter
 import com.example.heady.categories.BannerClickManager
 import com.example.heady.categories.subcategory.subCategoryIntent
 import com.example.heady.model.Category
+import com.example.heady.utils.inject
 import com.example.heady.utils.plusAssign
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_child_categories.*
-import kotlinx.android.synthetic.main.toolbar_with_title.*
+import kotlinx.android.synthetic.main.activity_child_categories.api_error_text
+import kotlinx.android.synthetic.main.activity_child_categories.loader
+import kotlinx.android.synthetic.main.activity_child_categories.rv
+import kotlinx.android.synthetic.main.toolbar_with_title.page_title
+import kotlinx.android.synthetic.main.toolbar_with_title.toolbar
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
 import timber.log.Timber
-import javax.inject.Inject
 
 /**
  * Display list of Child Categories like
@@ -37,7 +40,14 @@ fun Context.childCategoryIntent(category_id : Int, category_name : String) : Int
 
 class ChildCategoryActivity : DaggerAppCompatActivity(),BannerClickManager{
 
-    @Inject lateinit var viewModel : ChildCategoryViewModel
+    /**
+     * Service locator pattern:
+     * Instead of the using member injection, we are trying to fetch
+     * the dependencies generated in DaggerAppComponent using provision method in AppComponent interface + Extension function
+     * This allows us to instantiate dependencies lazily using Ext function defined in DaggerUtil.kt
+     */
+    private val viewModel : ChildCategoryViewModel by inject { childCategoryViewModel() }
+
     private val compositeSubscription by lazy(LazyThreadSafetyMode.NONE) { CompositeSubscription() }
     private val adapter by lazy(LazyThreadSafetyMode.NONE) { BannerAdapter(this) }
 

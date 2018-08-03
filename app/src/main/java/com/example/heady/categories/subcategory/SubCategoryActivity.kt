@@ -12,16 +12,18 @@ import com.example.heady.categories.childcategory.ChildCategoryViewModel
 import com.example.heady.categories.childcategory.ChildCategoryViewState
 import com.example.heady.model.Category
 import com.example.heady.products.productsListIntent
+import com.example.heady.utils.inject
 import com.example.heady.utils.plusAssign
-import com.example.heady.utils.toast
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_sub_category.*
-import kotlinx.android.synthetic.main.toolbar_with_title.*
+import kotlinx.android.synthetic.main.activity_sub_category.api_error_text
+import kotlinx.android.synthetic.main.activity_sub_category.loader
+import kotlinx.android.synthetic.main.activity_sub_category.rv
+import kotlinx.android.synthetic.main.toolbar_with_title.page_title
+import kotlinx.android.synthetic.main.toolbar_with_title.toolbar
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
 import timber.log.Timber
-import javax.inject.Inject
 
 /**
  * Shows SubCategories of Child Categories like Formal Shoes and Casual shoes under Foot Wear
@@ -39,7 +41,13 @@ fun Context.subCategoryIntent(category_id : Int, category_name : String) : Inten
 }
 
 class SubCategoryActivity() : DaggerAppCompatActivity(),BannerClickManager{
-    @Inject lateinit var viewModel : ChildCategoryViewModel
+    /**
+     * Service locator pattern:
+     * Instead of the using member injection, we are trying to fetch
+     * the dependencies generated in DaggerAppComponent using provision method in AppComponent interface + Extension function
+     * This allows us to instantiate dependencies lazily using Ext function defined in DaggerUtil.kt
+     */
+    private val viewModel : ChildCategoryViewModel by inject { childCategoryViewModel() }
 
     private val compositeSubscription by lazy(LazyThreadSafetyMode.NONE) { CompositeSubscription() }
     private val adapter by lazy(LazyThreadSafetyMode.NONE) { BannerAdapter(this) }
