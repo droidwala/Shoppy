@@ -16,9 +16,9 @@ import timber.log.Timber
  * Created by punitdama on 12/12/17.
  */
 
-class ShoppyApplication : DaggerApplication(){
+class ShoppyApplication : DaggerApplication() {
 
-    lateinit var component : AppComponent
+    lateinit var component: AppComponent
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
@@ -31,10 +31,8 @@ class ShoppyApplication : DaggerApplication(){
         Realm.setDefaultConfiguration(realmConfig)
     }
 
-
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
         component = DaggerAppComponent.builder().application(this).build()
         return component
     }
-
 }

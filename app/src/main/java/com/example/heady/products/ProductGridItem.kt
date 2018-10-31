@@ -11,7 +11,7 @@ import com.xwray.groupie.Item
  * Created by punitdama on 14/12/17.
  */
 
-class ProductGridItem(val product : Product) : Item<ItemGridProductBinding>(){
+class ProductGridItem(val product: Product) : Item<ItemGridProductBinding>() {
 
     override fun getLayout() = R.layout.item_grid_product
 
@@ -22,10 +22,6 @@ class ProductGridItem(val product : Product) : Item<ItemGridProductBinding>(){
                 .into(viewBinding.productImage)
 
         viewBinding.productName.text = product.name
-        viewBinding.productPrice.text = viewBinding.root.context.getString(R.string.product_price,product.variants[0]?.price.toString())
+        viewBinding.productPrice.text = viewBinding.root.context.getString(R.string.product_price, product.variants[0]?.price.toString())
     }
-
-
-
-
 }

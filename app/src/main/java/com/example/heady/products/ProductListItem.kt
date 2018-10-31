@@ -1,9 +1,7 @@
 package com.example.heady.products
 
 import android.graphics.Color
-import android.support.v4.content.ContextCompat
 import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.bumptech.glide.Glide
 import com.example.heady.R
@@ -15,7 +13,7 @@ import com.xwray.groupie.Item
  * ViewHolder showing individual Product item
  * Created by punitdama on 14/12/17.
  */
-class ProductListItem(val product : Product) : Item<ItemListProductBinding>(){
+class ProductListItem(val product: Product) : Item<ItemListProductBinding>() {
 
     override fun getLayout() = R.layout.item_list_product
 
@@ -26,17 +24,17 @@ class ProductListItem(val product : Product) : Item<ItemListProductBinding>(){
                 .into(viewBinding.productImage)
 
         viewBinding.productName.text = product.name
-        viewBinding.productPrice.text = viewBinding.root.context.getString(R.string.product_price,product.variants[0]?.price.toString())
-        viewBinding.productSize.text = viewBinding.root.context.getString(R.string.product_size,product.variants[0]?.size.toString())
+        viewBinding.productPrice.text = viewBinding.root.context.getString(R.string.product_price, product.variants[0]?.price.toString())
+        viewBinding.productSize.text = viewBinding.root.context.getString(R.string.product_size, product.variants[0]?.size.toString())
 
         viewBinding.productColors.removeAllViews()
-        for(variant in product.variants){
+        for (variant in product.variants) {
             val view = View(viewBinding.root.context)
-            val layoutParams = LinearLayout.LayoutParams(48,48)
-            layoutParams.setMargins(0,0,8,0)
+            val layoutParams = LinearLayout.LayoutParams(48, 48)
+            layoutParams.setMargins(0, 0, 8, 0)
             view.layoutParams = layoutParams
-            view.setPadding(8,8,8,8)
-            view.setBackgroundColor(Color.parseColor(colorMap[variant.color]?: "#000000"))
+            view.setPadding(8, 8, 8, 8)
+            view.setBackgroundColor(Color.parseColor(colorMap[variant.color] ?: "#000000"))
             viewBinding.productColors.addView(view)
         }
     }

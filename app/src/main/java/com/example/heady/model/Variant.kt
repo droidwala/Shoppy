@@ -10,9 +10,9 @@ import io.realm.annotations.PrimaryKey
  */
 
 open class Variant(
-        @PrimaryKey
-        var id : Int = 0,
-        var color : String = "",
-        var size : Int = 0,
-        var price : Long = 0
+    @PrimaryKey
+    var id: Int = 0,
+    var color: String = "",
+    var size: Int = 0,
+    var price: Long = 0
 ) : RealmObject()

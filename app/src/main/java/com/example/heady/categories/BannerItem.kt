@@ -10,10 +10,9 @@ import com.xwray.groupie.Item
  * ViewHolder used to display banner item for Parent Categories
  * Created by punitdama on 13/12/17.
  */
-class BannerItem(val category : Category,val clickManager : BannerClickManager) : Item<ItemBannerBinding>(){
+class BannerItem(val category: Category, val clickManager: BannerClickManager) : Item<ItemBannerBinding>() {
 
     override fun getLayout() = R.layout.item_banner
-
 
     override fun bind(viewBinding: ItemBannerBinding, position: Int) {
         Glide.with(viewBinding.root.context)
@@ -26,11 +25,9 @@ class BannerItem(val category : Category,val clickManager : BannerClickManager) 
         viewBinding.parent.setOnClickListener {
             clickManager.openSubCategory(category)
         }
-
     }
-
 }
 
-interface BannerClickManager{
+interface BannerClickManager {
     fun openSubCategory(category: Category)
 }

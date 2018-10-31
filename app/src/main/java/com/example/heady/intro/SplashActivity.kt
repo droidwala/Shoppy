@@ -14,9 +14,9 @@ import java.util.concurrent.TimeUnit
  * Just showing logo and then opening MainScreen after 1-sec delay
  * Created by punitdama on 12/12/17.
  */
-class SplashActivity : Activity(){
+class SplashActivity : Activity() {
 
-    private var subscription : Subscription? = null
+    private var subscription: Subscription? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,15 +25,14 @@ class SplashActivity : Activity(){
 
     override fun onResume() {
         super.onResume()
-        //Mocking 1 sec delay in Splash screen
+        // Mocking 1 sec delay in Splash screen
         subscription = Single.just(true)
-                .delay(1,TimeUnit.SECONDS)
+                .delay(1, TimeUnit.SECONDS)
                 .subscribe({
                     takeUserInsideApp()
                 }, {
                     takeUserInsideApp()
                 })
-
     }
 
     override fun onPause() {
@@ -41,7 +40,7 @@ class SplashActivity : Activity(){
         subscription?.unsubscribe()
     }
 
-    private fun takeUserInsideApp(){
+    private fun takeUserInsideApp() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }

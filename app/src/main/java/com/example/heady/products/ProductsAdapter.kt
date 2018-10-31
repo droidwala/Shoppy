@@ -7,20 +7,18 @@ import com.xwray.groupie.GroupAdapter
  * RecyclerView Adapter attached to Recyclerview showing List of Products
  * Created by punitdama on 14/12/17.
  */
-class ProductsAdapter(val isGridLayout : Boolean = true) : GroupAdapter(){
+class ProductsAdapter(val isGridLayout: Boolean = true) : GroupAdapter() {
 
-    fun addProducts(products : List<Product>){
+    fun addProducts(products: List<Product>) {
         clear()
-        if(isGridLayout) {
+        if (isGridLayout) {
             for (product in products) {
                 add(ProductGridItem(product))
             }
-        }
-        else{
-            for(product in products){
+        } else {
+            for (product in products) {
                 add(ProductListItem(product))
             }
         }
     }
-
 }

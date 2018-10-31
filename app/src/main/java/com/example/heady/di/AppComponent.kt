@@ -20,14 +20,14 @@ import javax.inject.Singleton
         AndroidSupportInjectionModule::class))
 interface AppComponent : AndroidInjector<ShoppyApplication> {
 
-    fun mainViewModel() : MainViewModel
-    fun childCategoryViewModel() : ChildCategoryViewModel
+    fun mainViewModel(): MainViewModel
+    fun childCategoryViewModel(): ChildCategoryViewModel
 
     @Component.Builder
-    interface Builder{
-        fun build() : AppComponent
+    interface Builder {
+        fun build(): AppComponent
 
         @BindsInstance
-        fun application(app: Application) : AppComponent.Builder
+        fun application(app: Application): AppComponent.Builder
     }
 }
