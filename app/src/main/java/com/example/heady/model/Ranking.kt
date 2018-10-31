@@ -10,7 +10,7 @@ import io.realm.annotations.PrimaryKey
  * Created by punitdama on 12/12/17.
  */
 open class Ranking(
-        @PrimaryKey
-        var ranking : String = "",
-        var products : RealmList<ProductRanking> = RealmList()
+    @PrimaryKey
+    var ranking: String = "",
+    var products: RealmList<ProductRanking> = RealmList()
 ) : RealmObject()

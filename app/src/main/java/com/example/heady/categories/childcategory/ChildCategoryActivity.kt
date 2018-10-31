@@ -30,15 +30,15 @@ import timber.log.Timber
 const val CATEGORY_ID = "id"
 const val CATEGORY_NAME = "name"
 
-//Entry point
-fun Context.childCategoryIntent(category_id : Int, category_name : String) : Intent{
-    return Intent(this,ChildCategoryActivity::class.java).apply {
-        putExtra(CATEGORY_ID,category_id)
-        putExtra(CATEGORY_NAME,category_name)
+// Entry point
+fun Context.childCategoryIntent(category_id: Int, category_name: String): Intent {
+    return Intent(this, ChildCategoryActivity::class.java).apply {
+        putExtra(CATEGORY_ID, category_id)
+        putExtra(CATEGORY_NAME, category_name)
     }
 }
 
-class ChildCategoryActivity : DaggerAppCompatActivity(),BannerClickManager{
+class ChildCategoryActivity : DaggerAppCompatActivity(), BannerClickManager {
 
     /**
      * Service locator pattern:
@@ -46,20 +46,19 @@ class ChildCategoryActivity : DaggerAppCompatActivity(),BannerClickManager{
      * the dependencies generated in DaggerAppComponent using provision method in AppComponent interface + Extension function
      * This allows us to instantiate dependencies lazily using Ext function defined in DaggerUtil.kt
      */
-    private val viewModel : ChildCategoryViewModel by inject { childCategoryViewModel() }
+    private val viewModel: ChildCategoryViewModel by inject { childCategoryViewModel() }
 
     private val compositeSubscription by lazy(LazyThreadSafetyMode.NONE) { CompositeSubscription() }
     private val adapter by lazy(LazyThreadSafetyMode.NONE) { BannerAdapter(this) }
 
-    private var category_id : Int = 0
-
+    private var category_id: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_child_categories)
 
-        category_id = intent.getIntExtra(CATEGORY_ID,0)
-        if(category_id == 0){
+        category_id = intent.getIntExtra(CATEGORY_ID, 0)
+        if (category_id == 0) {
             finish()
         }
 
@@ -69,28 +68,25 @@ class ChildCategoryActivity : DaggerAppCompatActivity(),BannerClickManager{
         compositeSubscription += viewModel.fetchData(category_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe ({Timber.d("Child categories fetched")},
-                        {error -> Timber.d("Error fetching child categories" + error.localizedMessage)})
+                .subscribe({ Timber.d("Child categories fetched") },
+                        { error -> Timber.d("Error fetching child categories" + error.localizedMessage) })
 
         compositeSubscription += viewModel.viewState()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::render,
-                        {error -> Timber.d("Error rendering viewState " + error.localizedMessage)})
-
+                        { error -> Timber.d("Error rendering viewState " + error.localizedMessage) })
     }
 
-
-    private fun render(viewState: ChildCategoryViewState){
-        when(viewState.isLoading){
+    private fun render(viewState: ChildCategoryViewState) {
+        when (viewState.isLoading) {
             true -> loader.visibility = View.VISIBLE
             false -> loader.visibility = View.GONE
         }
 
-        if(viewState.error !=null){
+        if (viewState.error != null) {
             api_error_text.visibility = View.VISIBLE
             api_error_text.text = viewState.error
-        }
-        else{
+        } else {
             api_error_text.visibility = View.GONE
         }
 
@@ -99,13 +95,13 @@ class ChildCategoryActivity : DaggerAppCompatActivity(),BannerClickManager{
         }
     }
 
-    private fun toolbarSetUp(){
+    private fun toolbarSetUp() {
         setSupportActionBar(toolbar)
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)
             it.setDisplayShowTitleEnabled(false)
         }
-        toolbar.setNavigationOnClickListener{finish()}
+        toolbar.setNavigationOnClickListener { finish() }
         page_title.text = intent.getStringExtra(CATEGORY_NAME)
     }
 
@@ -114,8 +110,8 @@ class ChildCategoryActivity : DaggerAppCompatActivity(),BannerClickManager{
         compositeSubscription.unsubscribe()
     }
 
-    //Exit point
+    // Exit point
     override fun openSubCategory(category: Category) {
-        startActivity(subCategoryIntent(category.id,category.name))
+        startActivity(subCategoryIntent(category.id, category.name))
     }
 }

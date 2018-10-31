@@ -16,11 +16,11 @@ import javax.inject.Singleton
  * Created by punitdama on 13/12/17.
  */
 @Module
-class RepositoryModule{
+class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideGson() : Gson {
+    fun provideGson(): Gson {
         return GsonBuilder()
                 .excludeFieldsWithModifiers(Modifier.FINAL, Modifier.TRANSIENT, Modifier.STATIC)
                 .create()
@@ -28,7 +28,7 @@ class RepositoryModule{
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(app: Context) : OkHttpClient {
+    fun provideOkHttpClient(app: Context): OkHttpClient {
         return OkHttpClient.Builder()
                 .connectTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)

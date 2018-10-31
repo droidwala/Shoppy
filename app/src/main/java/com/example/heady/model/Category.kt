@@ -9,12 +9,12 @@ import io.realm.annotations.PrimaryKey
  * Created by punitdama on 12/12/17.
  */
 open class Category(
-        @PrimaryKey
-        var id : Int = 0,
-        var name : String = "",
-        var banner_url : String = "",
-        var products : RealmList<Product> = RealmList(),
-        var child_categories : RealmList<Int> = RealmList()
+    @PrimaryKey
+    var id: Int = 0,
+    var name: String = "",
+    var banner_url: String = "",
+    var products: RealmList<Product> = RealmList(),
+    var child_categories: RealmList<Int> = RealmList()
 ) : RealmObject()
 
 const val CATEGORY_ID = "id"

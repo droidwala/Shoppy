@@ -11,9 +11,8 @@ import com.xwray.groupie.Item
  * Created by punitdama on 14/12/17.
  */
 
-class ChildBannerItem(val category : Category, val clickManager : BannerClickManager) : Item<ItemChildBannerBinding>(){
+class ChildBannerItem(val category: Category, val clickManager: BannerClickManager) : Item<ItemChildBannerBinding>() {
     override fun getLayout() = R.layout.item_child_banner
-
 
     override fun bind(viewBinding: ItemChildBannerBinding, position: Int) {
         Glide.with(viewBinding.root.context)
@@ -26,7 +25,5 @@ class ChildBannerItem(val category : Category, val clickManager : BannerClickMan
         viewBinding.parent.setOnClickListener {
             clickManager.openSubCategory(category)
         }
-
     }
-
 }

@@ -5,7 +5,6 @@ package com.example.heady.utils
  */
 const val URL = "https://stark-spire-93433.herokuapp.com/json"
 
-
 const val MENS_WEAR_BANNER_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513061097/Mens_Wear.jpg"
 const val ELECTRONICS_BANNER_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513062647/Electronics.jpg"
 
@@ -19,13 +18,11 @@ const val LAPTOPS_BANNER_URL = "http://res.cloudinary.com/dtzroixdb/image/upload
 const val TSHIRTS_BANNER_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513064424/T-Shirts.jpg"
 const val SHIRTS_BANNER_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513066763/Shirts.jpg"
 
-
 const val JEANS_BANNER_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513065287/Jeans.jpg"
 const val TROUSERS_BANNER_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513066669/Trousers.jpg"
 
 const val CASUAL_FOOTWEAR_BANNER_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513065806/Casual_Shoes.jpg"
 const val FORMAL_FOOTWEAR_BANNER_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513066904/Formal_Shoes.jpg"
-
 
 const val TSHIRT_IMAGE_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513066994/TShirt.jpg"
 const val SHIRT_IMAGE_URL = "http://res.cloudinary.com/dtzroixdb/image/upload/v1513067074/Shirt.png"

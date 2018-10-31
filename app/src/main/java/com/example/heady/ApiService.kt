@@ -14,19 +14,17 @@ import javax.inject.Singleton
  * Created by punitdama on 12/12/17.
  */
 @Singleton
-class ApiService @Inject constructor(val client : OkHttpClient, val gson : Gson){
+class ApiService @Inject constructor(val client: OkHttpClient, val gson: Gson) {
 
-    inline fun <reified T> get(url : String) : Single<T>{
-            return Single.fromCallable{
+    inline fun <reified T> get(url: String): Single<T> {
+            return Single.fromCallable {
                 val request = Request.Builder().url(url).build()
                 val response = client.newCall(request).execute()
-                if(response.isSuccessful){
-                    return@fromCallable gson.fromJson(response.body()?.string(),T::class.java)
-                }
-                else{
+                if (response.isSuccessful) {
+                    return@fromCallable gson.fromJson(response.body()?.string(), T::class.java)
+                } else {
                     throw Exception("Error fetching data " + response.code().toString())
                 }
             }
     }
-
 }

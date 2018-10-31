@@ -13,18 +13,17 @@ import dagger.android.ContributesAndroidInjector
  * Created by punitdama on 13/12/17.
  */
 @Module
-abstract class ActivityBindingModule{
+abstract class ActivityBindingModule {
 
     @ContributesAndroidInjector()
-    abstract fun mainActivity() : MainActivity
+    abstract fun mainActivity(): MainActivity
 
     @ContributesAndroidInjector()
-    abstract fun childCategoryActivity() : ChildCategoryActivity
+    abstract fun childCategoryActivity(): ChildCategoryActivity
 
     @ContributesAndroidInjector
-    abstract fun subCategoryActivity() : SubCategoryActivity
+    abstract fun subCategoryActivity(): SubCategoryActivity
 
     @ContributesAndroidInjector
-    abstract fun productsActivity() : ProductsActivity
-
+    abstract fun productsActivity(): ProductsActivity
 }

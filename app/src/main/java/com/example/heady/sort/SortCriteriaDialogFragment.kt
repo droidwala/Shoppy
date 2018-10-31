@@ -15,15 +15,15 @@ import com.example.heady.utils.CLEAR_SORT_FLAGS
  * Created by punitdama on 14/12/17.
  */
 const val SELECTED_CRITERIA = "selected_criteria"
-class SortCriteriaDialogFragment() : BottomSheetDialogFragment(),SortCriteriaClickManager{
+class SortCriteriaDialogFragment() : BottomSheetDialogFragment(), SortCriteriaClickManager {
 
-    private lateinit var viewBinding : SortBottomDialogBinding
-    private var selected_criteria : String? = null
+    private lateinit var viewBinding: SortBottomDialogBinding
+    private var selected_criteria: String? = null
 
     companion object {
-        fun newInstance(selected_criteria : String?) : SortCriteriaDialogFragment{
+        fun newInstance(selected_criteria: String?): SortCriteriaDialogFragment {
             val args = Bundle()
-            args.putString(SELECTED_CRITERIA,selected_criteria)
+            args.putString(SELECTED_CRITERIA, selected_criteria)
             val frag = SortCriteriaDialogFragment()
             frag.arguments = args
             return frag
@@ -33,11 +33,10 @@ class SortCriteriaDialogFragment() : BottomSheetDialogFragment(),SortCriteriaCli
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         selected_criteria = arguments?.getString(SELECTED_CRITERIA)
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        viewBinding = SortBottomDialogBinding.inflate(inflater,container,false)
+        viewBinding = SortBottomDialogBinding.inflate(inflater, container, false)
         return viewBinding.root
     }
 
@@ -49,17 +48,16 @@ class SortCriteriaDialogFragment() : BottomSheetDialogFragment(),SortCriteriaCli
             selected_criteria?.let {
                 sortBy(CLEAR_SORT_FLAGS)
                 dismiss()
-            }?: dismiss()
+            } ?: dismiss()
         }
     }
 
-    private val recyclerViewSetUp : RecyclerView.() -> Unit = {
-        adapter = SortCriteriaAdapter(selected_criteria,this@SortCriteriaDialogFragment)
+    private val recyclerViewSetUp: RecyclerView.() -> Unit = {
+        adapter = SortCriteriaAdapter(selected_criteria, this@SortCriteriaDialogFragment)
     }
 
     override fun sortBy(query: String) {
         (activity as ProductsActivity).sortData(query)
         dismiss()
     }
-
 }

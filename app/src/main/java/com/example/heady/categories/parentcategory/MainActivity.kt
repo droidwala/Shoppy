@@ -23,9 +23,9 @@ import javax.inject.Inject
  * Created by punitdama on 12/12/17.
  */
 class MainActivity : DaggerAppCompatActivity(), BannerClickManager {
-    private val compositeSubscription by lazy(LazyThreadSafetyMode.NONE){ CompositeSubscription() }
+    private val compositeSubscription by lazy(LazyThreadSafetyMode.NONE) { CompositeSubscription() }
     private val adapter by lazy(LazyThreadSafetyMode.NONE) { BannerAdapter(this) }
-    @Inject lateinit var viewModel : MainViewModel
+    @Inject lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,27 +37,25 @@ class MainActivity : DaggerAppCompatActivity(), BannerClickManager {
         compositeSubscription += viewModel.viewState()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::render,
-                        {error -> Timber.d("Error rendering view state" + error.localizedMessage)})
+                        { error -> Timber.d("Error rendering view state" + error.localizedMessage) })
 
         compositeSubscription += viewModel.fetchData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ Timber.d("Response received")},
-                        {_ -> Timber.d("Error receiving response")})
-
+                .subscribe({ Timber.d("Response received") },
+                        { _ -> Timber.d("Error receiving response") })
     }
 
-    private fun render(viewState : MainViewState){
-        when(viewState.isLoading){
+    private fun render(viewState: MainViewState) {
+        when (viewState.isLoading) {
             true -> loader.visibility = View.VISIBLE
             false -> loader.visibility = View.GONE
         }
 
-        if(viewState.error !=null){
+        if (viewState.error != null) {
             api_error_text.visibility = View.VISIBLE
             api_error_text.text = viewState.error
-        }
-        else{
+        } else {
             api_error_text.visibility = View.GONE
         }
 
@@ -71,8 +69,8 @@ class MainActivity : DaggerAppCompatActivity(), BannerClickManager {
         compositeSubscription.unsubscribe()
     }
 
-    //Exit point
+    // Exit point
     override fun openSubCategory(category: Category) {
-        startActivity(childCategoryIntent(category.id,category.name))
+        startActivity(childCategoryIntent(category.id, category.name))
     }
 }

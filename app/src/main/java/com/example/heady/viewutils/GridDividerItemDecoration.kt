@@ -8,13 +8,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.example.heady.R
 
-
 /**
  * Used to create Divider Item decoration where dividers are drawn both in vertical and horizontal direction
  * Created by punitdama on 14/12/17.
  */
 
-class GridDividerDecoration(context: Context) : RecyclerView.ItemDecoration() {
+class GridDividerItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
 
     private val mDivider: Drawable?
     private val mInsets: Int
@@ -68,8 +67,13 @@ class GridDividerDecoration(context: Context) : RecyclerView.ItemDecoration() {
         }
     }
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        //We can supply forced insets for each item view here in the Rect
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
+        // We can supply forced insets for each item view here in the Rect
         outRect.set(mInsets, mInsets, mInsets, mInsets)
     }
 

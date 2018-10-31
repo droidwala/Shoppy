@@ -1,7 +1,13 @@
 package com.example.heady
 
 import android.support.v4.util.Pair
-import com.example.heady.model.*
+import com.example.heady.model.ApiResponse
+import com.example.heady.model.CATEGORY_ID
+import com.example.heady.model.CATEGORY_NAME
+import com.example.heady.model.Category
+import com.example.heady.model.Product
+import com.example.heady.model.ProductRanking
+import com.example.heady.model.Ranking
 import io.realm.Realm
 import io.realm.kotlin.where
 import rx.Single
@@ -15,16 +21,15 @@ import javax.inject.Singleton
  * Created by punitdama on 13/12/17.
  */
 @Singleton
-class RealmService @Inject constructor(){
+class RealmService @Inject constructor() {
 
-    fun fetchParentCategories() : Single<ApiResponse>{
+    fun fetchParentCategories(): Single<ApiResponse> {
         return Single.fromCallable {
             val realmDb = Realm.getDefaultInstance()
 
             val categories = realmDb.where<Category>()
-                    .`in`(CATEGORY_NAME, arrayOf("Mens Wear","Electronics"))
-                    .findAll()
-
+                .`in`(CATEGORY_NAME, arrayOf("Mens Wear", "Electronics"))
+                .findAll()
 
             val result = realmDb.copyFromRealm(categories)
 
@@ -33,12 +38,12 @@ class RealmService @Inject constructor(){
         }
     }
 
-    fun fetchChildCategories(parent_id : Int) : Single<List<Category>>{
+    fun fetchChildCategories(parent_id: Int): Single<List<Category>> {
         return Single.fromCallable {
             val realmDb = Realm.getDefaultInstance()
             val parent_category = realmDb.where<Category>()
-                    .equalTo(CATEGORY_ID, parent_id)
-                    .findFirst()
+                .equalTo(CATEGORY_ID, parent_id)
+                .findFirst()
 
             val result = realmDb.copyFromRealm(parent_category!!)
 
@@ -50,8 +55,8 @@ class RealmService @Inject constructor(){
             category_ids.toArray(filter)
 
             val child_categories = realmDb.where<Category>()
-                    .`in`(CATEGORY_ID,filter)
-                    .findAll()
+                .`in`(CATEGORY_ID, filter)
+                .findAll()
 
             val result = realmDb.copyFromRealm(child_categories)
 
@@ -60,53 +65,57 @@ class RealmService @Inject constructor(){
         }
     }
 
-    fun fetchProducts(parent_id: Int) : Single<List<Product>>{
+    fun fetchProducts(parent_id: Int): Single<List<Product>> {
         return Single.fromCallable {
             val realmDb = Realm.getDefaultInstance()
             val category = realmDb.where<Category>()
-                    .equalTo(CATEGORY_ID,parent_id)
-                    .findFirst()
+                .equalTo(CATEGORY_ID, parent_id)
+                .findFirst()
 
-            val result = realmDb.copyFromRealm(category);
+            val result = realmDb.copyFromRealm(category)
             realmDb.close()
             return@fromCallable result?.products
         }
     }
 
-    fun sortProductsByViewCount(parent_id: Int, query : String) : Single<List<Product>>{
-       return Single.zip(fetchProductRankings(query),
-                fetchProducts(parent_id),
-                this::generatePair)
-                .flatMap(this::sortByViewCount)
-    }
-
-    fun sortProductsByOrderCount(parent_id: Int, query: String) : Single<List<Product>>{
+    fun sortProductsByViewCount(parent_id: Int, query: String): Single<List<Product>> {
         return Single.zip(
-                fetchProductRankings(query),
-                fetchProducts(parent_id),
-                this::generatePair)
-                .flatMap(this::sortByOrderCount)
+            fetchProductRankings(query),
+            fetchProducts(parent_id),
+            this::generatePair
+        )
+            .flatMap(this::sortByViewCount)
     }
 
-    fun sortProductsByShareCount(parent_id: Int, query: String) : Single<List<Product>>{
+    fun sortProductsByOrderCount(parent_id: Int, query: String): Single<List<Product>> {
         return Single.zip(
-                fetchProductRankings(query),
-                fetchProducts(parent_id),
-                this::generatePair)
-                .flatMap(this::sortBySharesCount)
+            fetchProductRankings(query),
+            fetchProducts(parent_id),
+            this::generatePair
+        )
+            .flatMap(this::sortByOrderCount)
     }
 
-    private fun fetchProductRankings(query : String) : Single<MutableMap<Int,ProductRanking>>{
+    fun sortProductsByShareCount(parent_id: Int, query: String): Single<List<Product>> {
+        return Single.zip(
+            fetchProductRankings(query),
+            fetchProducts(parent_id),
+            this::generatePair
+        )
+            .flatMap(this::sortBySharesCount)
+    }
+
+    private fun fetchProductRankings(query: String): Single<MutableMap<Int, ProductRanking>> {
         return Single.fromCallable {
             val realmDb = Realm.getDefaultInstance()
             val ranking_realm = realmDb.where<Ranking>()
-                    .equalTo("ranking",query)
-                    .findFirst()
+                .equalTo("ranking", query)
+                .findFirst()
 
             val result = realmDb.copyFromRealm(ranking_realm)
 
-            val product_rankings = mutableMapOf<Int,ProductRanking>()
-            for(product in result!!.products){
+            val product_rankings = mutableMapOf<Int, ProductRanking>()
+            for (product in result!!.products) {
                 product_rankings[product.id] = product
             }
 
@@ -115,14 +124,17 @@ class RealmService @Inject constructor(){
         }
     }
 
-    private fun generatePair(product_rankings : MutableMap<Int,ProductRanking>, products : List<Product>)
-            = Pair.create(product_rankings,products)
+    private fun generatePair(
+        product_rankings: MutableMap<Int, ProductRanking>,
+        products: List<Product>
+    ) =
+        Pair.create(product_rankings, products)
 
-    private fun sortByViewCount(pair : Pair<MutableMap<Int,ProductRanking>,List<Product>>) : Single<List<Product>>{
+    private fun sortByViewCount(pair: Pair<MutableMap<Int, ProductRanking>, List<Product>>): Single<List<Product>> {
         val product_rankings = pair.first!!
         val products = pair.second!!
 
-        for(index in products.indices){
+        for (index in products.indices) {
             product_rankings[products[index].id]?.let {
                 products[index].view_count = it.view_count
             }
@@ -133,11 +145,11 @@ class RealmService @Inject constructor(){
         })
     }
 
-    private fun sortByOrderCount(pair : Pair<MutableMap<Int,ProductRanking>,List<Product>>) : Single<List<Product>>{
+    private fun sortByOrderCount(pair: Pair<MutableMap<Int, ProductRanking>, List<Product>>): Single<List<Product>> {
         val product_rankings = pair.first!!
         val products = pair.second!!
 
-        for(index in products.indices){
+        for (index in products.indices) {
             product_rankings[products[index].id]?.let {
                 products[index].order_count = it.order_count
             }
@@ -148,11 +160,11 @@ class RealmService @Inject constructor(){
         })
     }
 
-    private fun sortBySharesCount(pair : Pair<MutableMap<Int,ProductRanking>,List<Product>>) : Single<List<Product>>{
+    private fun sortBySharesCount(pair: Pair<MutableMap<Int, ProductRanking>, List<Product>>): Single<List<Product>> {
         val product_rankings = pair.first!!
         val products = pair.second!!
 
-        for(index in products.indices){
+        for (index in products.indices) {
             product_rankings[products[index].id]?.let {
                 products[index].shares = it.shares
             }
@@ -162,7 +174,4 @@ class RealmService @Inject constructor(){
             it.shares
         })
     }
-
-
-
 }
