@@ -53,6 +53,6 @@ ext {
     rxandroidVersion = "1.2.1"
 
     //Logging
-    timberVersion = "4.6.0"
+    timberVersion = "4.7.0"
     chuckVersion = "1.0.3"
 }
