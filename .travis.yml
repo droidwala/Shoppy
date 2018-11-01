@@ -1,0 +1,38 @@
+language: android
+
+before_install:
+  - yes | sdkmanager "platforms;android-27"
+  - yes | sdkmanager "build-tools;27.0.3"
+
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-27.0.3
+    - android-27
+
+    # Additional components
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - addon-google_apis-google-27
+
+  licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+
+jdk: oraclejdk8
+
+notifications:
+  email: false
+
+script:
+  - ./gradlew build check
+
+before_cache:
+    - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+cache:
+  directories:
+    - $HOME/.m2
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
