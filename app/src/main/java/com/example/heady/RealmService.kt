@@ -1,6 +1,6 @@
 package com.example.heady
 
-import android.support.v4.util.Pair
+import androidx.core.util.Pair
 import com.example.heady.model.ApiResponse
 import com.example.heady.model.CATEGORY_ID
 import com.example.heady.model.CATEGORY_NAME

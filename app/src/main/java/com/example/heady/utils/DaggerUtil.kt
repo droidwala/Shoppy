@@ -1,7 +1,7 @@
 package com.example.heady.utils
 
 import android.content.Context
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import com.example.heady.ShoppyApplication
 import com.example.heady.di.AppComponent
 import kotlin.LazyThreadSafetyMode.NONE
