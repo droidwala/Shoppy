@@ -1,14 +1,14 @@
 package com.example.heady.sort
 
 import android.os.Bundle
-import android.support.design.widget.BottomSheetDialogFragment
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.example.heady.databinding.SortBottomDialogBinding
 import com.example.heady.products.ProductsActivity
 import com.example.heady.utils.CLEAR_SORT_FLAGS
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 /**
  * Sort Dialog shown as BottomSheetDialogFragment

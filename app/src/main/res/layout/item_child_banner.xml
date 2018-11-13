@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,7 +13,7 @@
         android:layout_marginBottom="8dp"
         app:cardBackgroundColor="@color/colorWhite">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -39,7 +39,7 @@
                 android:textColor="@color/abbey"
                 />
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="@dimen/right_chevron_30dp"
                 android:layout_height="@dimen/right_chevron_30dp"
                 app:srcCompat="@drawable/ic_chevron_right_black_24dp"
@@ -49,7 +49,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/category_name"
                 />
 
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v7.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </layout>

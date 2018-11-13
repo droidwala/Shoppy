@@ -3,8 +3,8 @@ package com.example.heady.categories.subcategory
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
 import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.heady.R
 import com.example.heady.categories.BannerAdapter
 import com.example.heady.categories.BannerClickManager
